@@ -91,6 +91,55 @@ Optional: Set environment-specific configurations in `appsettings.Development.js
 
 **Port conflicts**: Change the port in `launchSettings.json` if port 5064 is already in use.
 
+## Testing
+
+### Run All Tests
+
+```bash
+dotnet test --verbosity detailed
+```
+
+### Run Specific Test Project
+
+```bash
+dotnet test DotnetPgDemo.Api.Tests/DotnetPgDemo.Api.Tests.csproj --verbosity detailed
+```
+
+### Test Coverage Report
+
+Generate and view a detailed HTML coverage report:
+
+```bash
+rm -rf TestResults && dotnet test --collect:"XPlat Code Coverage" && reportgenerator "-reports:TestResults/*/coverage.cobertura.xml" "-targetdir:coverage_html_report" "-reporttypes:HtmlInline_AzurePipelines" "-filefilters:-*obj*"
+```
+
+Then open the report:
+
+```bash
+start coverage_html_report/index.html
+```
+
+This command:
+- Cleans previous test results
+- Runs tests with code coverage collection
+- Generates an HTML coverage report
+- Opens the report in your default browser
+
+### Test Coverage Details
+
+The project includes unit tests for the `PeopleController`:
+- ✅ Valid person creation returns 200 OK
+- ✅ Valid person is saved to database
+- ✅ Empty FirstName validation
+- ✅ Empty LastName validation
+- ✅ MaxLength validation (30 characters)
+- ✅ Multiple people can be created
+
+Tests use:
+- **xUnit** - Testing framework
+- **In-Memory Database** - For isolated testing without PostgreSQL
+- **Entity Framework Core** - For data validation
+
 ## Development
 
 To create a new migration after model changes:

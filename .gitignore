@@ -480,3 +480,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Code coverage folders
+DotnetPgDemo.Api.Tests/coverage_html_report

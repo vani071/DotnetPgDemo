@@ -18,6 +18,11 @@ namespace DotnetPgDemo.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 _context.People.Add(person);
                 await _context.SaveChangesAsync();
                 return Ok(person); // 200 OK with created person
